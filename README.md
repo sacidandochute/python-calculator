@@ -2,7 +2,7 @@
 
 [Python](https://www.python.org/)
 
-At first, I created this project as a practicing file for Python, but it grew into something I never knew I'd work on. I decided to publish it on GitHub to show how people improve over time, and I hope this will also help with my dream of working at Microsoft. I am a young student, yet I aspire to learn coding to work with Microsoft, as I have said earlier.  As of the time of publishing this, it's on version 1.6.
+At first, I created this project as a practicing file for Python, but it grew into something I never knew I'd work on. I decided to publish it on GitHub to show how people improve over time, and I hope this will also help with my dream of working at Microsoft. I am a young student and aspiring developer, passionate about learning to code and hoping to one day work with Microsoft. As of the time of publishing this, it's on version 1.6.
 
 ## Features
 
@@ -11,6 +11,8 @@ At first, I created this project as a practicing file for Python, but it grew in
 - **History:** See a list of all your previous calculations.
 
 ## Usage
+
+Type this command in your terminal (Command Prompt, PowerShell, or Terminal):
 
 ```bash
 python calculator.py
