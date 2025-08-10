@@ -1,52 +1,45 @@
 from math import sqrt
 
-print("calculadora versão 1.5\n")  
-print("REPORTAR PROBLEMAS!\n")
-print("GRAÇAS AO DEEPSEEK, A VERSÃO 1.5 EXISTE!\n")
+print("calculator version 1.6\n")  
+print("REPORT PROBLEMS!\n")
 
-historico = []
+history = []
 
 while True:
-    print("Qual modo de calcular? (*, /, +, -, exp, sqrt):")  
-    modo = input().strip().lower()
+    print("Which mode of calculation? (*, /, +, -, exp, sqrt):")  
+    mode = input().strip().lower()
 
-    # --- FASE ESPECIAL PARA RAÍZ QUADRADA --- NÃO TRADUZIR PARA OUTRO IDIOMA ---
-    if modo == "sqrt":
-        print("\nDigite o número para raíz quadrada:")
+    # --- SPECIAL PHASE FOR SQRT ---
+    if mode == "sqrt":
+        print("\nType the number for a square root:")
         num1 = float(input())
         if num1 >= 0:
-            resultado = sqrt(num1)
+            result = sqrt(num1)
         else:
-            resultado = "Erro: número negativo!"
-        print("\nResultado:", resultado)
-        historico.append(f"√{num1} = {resultado}")
+            result = "Error: negative number!"
+        print("\nResult:", result)
+        history.append(f"√{num1} = {result}")
     else:
-        # --- OPERAÇÕES NORMAIS --- NÃO TRADUZIR PARA OUTRO IDIOMA ---
-        print("\nDigite o primeiro número:")  
+        # --- NORMAL OPERATIONS ---
+        print("\nType the first number:")  
         num1 = float(input())  
-        print("Digite o segundo número:")  
+        print("\nType the second number:")  
         num2 = float(input())
 
-        if modo == "*": resultado = num1 * num2
-        elif modo == "/": resultado = num1 / num2 if num2 != 0 else "Erro: divisão por zero!"  
-        elif modo == "+": resultado = num1 + num2
-        elif modo == "-": resultado = num1 - num2
-        elif modo == "exp": resultado = num1 ** num2
-        elif modo == "deepseek":
-            print("┌───────────────────────────────────────────────┐")
-            print("│     CALCULADORA VERSÃO 1.5.3 POR DEEPSEEK     │")
-            print("│        ➤  COLABORAÇÃO IA-HUMANA              │")
-            print("└───────────────────────────────────────────────┘")
-            resultado = "🔓 Easter Egg desbloqueado!"
+        if mode == "*": result = num1 * num2
+        elif mode == "/": result = num1 / num2 if num2 != 0 else "Error: dividing by zero!"  
+        elif mode == "+": result = num1 + num2
+        elif mode == "-": result = num1 - num2
+        elif mode == "exp": result = num1 ** num2
         else:  
-            resultado = "Modo inválido!"
-            print(resultado)
-            continue  # Pular para próximo loop se inválido
+            result = "Invalid mode!"
+            print(result)
+            continue  # Jump to next loop if valid.
 
-        print("\nResultado:", resultado)
-        historico.append(f"{num1} {modo} {num2} = {resultado}")
+        print("\nResult:", result)
+        history.append(f"{num1} {mode} {num2} = {result}")
 
-    # Continuar? 
-    if input("\nContinuar? (s/n): ").lower() != "s":
-        print("\nHistórico:", "\n".join(historico))
+    # Continue?
+    if input("\nContinue? (y/n): ").lower() != "y":
+        print("\nHistory:", "\n".join(history))
         break
