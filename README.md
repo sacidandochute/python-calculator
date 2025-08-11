@@ -12,12 +12,6 @@ At first, I created this project as a practicing file for Python, but it grew in
 
 ## Usage
 
-Type this command in your terminal (Command Prompt, PowerShell, or Terminal):
-
-```bash
-python calculator.py
-```
-
 Follow the on-screen instructions to start calculating!
 
 ## Contributing
