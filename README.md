@@ -2,7 +2,7 @@
 
 [Python](https://www.python.org/)
 
-At first, I created this project as a practicing file for Python, but it grew into something I never knew I'd work on. I decided to publish it on GitHub to show how people improve over time, and I hope this will also help with my dream of working at Microsoft. As of the time of publishing this, it's on version 1.5.4.
+At first, I created this project just as a file I had worked on to learn more about the programming language, but it turned into a lot more than that. This is one of if not the first projects I created for Python, but it has been heavily modified. The earliest version I know of, 1.5.3, was lost due to me forgetting to change the versions. Quite sorry for the inconsistency of the calculator's 1.5.3 and the page's 1.0.0, too.
 
 ## Features
 
