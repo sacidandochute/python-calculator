@@ -1,45 +1,114 @@
-from math import sqrt
+import math
+import json
 
-print("calculator version 1.6\n")  
-print("REPORT PROBLEMS!\n")
+print("Calculator v1.5.4\n")
+print("This is a prototype. Please report any bugs.\n")
+print("PS: PEMDAS is not supported. Parentheses, too, are not.\n")
 
-history = []
+try:
+    with open("history.json", "r") as file:
+        history = json.load(file)
+except FileNotFoundError:
+    history = []
 
-while True:
-    print("Which mode of calculation? (*, /, +, -, exp, sqrt):")  
-    mode = input().strip().lower()
+mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, history, quit): ")
 
-    # --- SPECIAL PHASE FOR SQRT ---
-    if mode == "sqrt":
-        print("\nType the number for a square root:")
-        num1 = float(input())
-        if num1 >= 0:
-            result = sqrt(num1)
+operations = ["+", "-", "*", "/", "^", "sqrt", "log", "sin", "cos", "tan", "history", "quit"]
+
+while mode in operations:
+    if mode == "+":
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        result = num1 + num2
+        print("The result is: ", result)
+        history.append(f"{num1} + {num2} = {result}")
+
+    elif mode == "-":
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        result = num1 - num2
+        print("The result is: ", result)
+        history.append(f"{num1} - {num2} = {result}")
+
+    elif mode == "*":
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        result = num1 * num2
+        print("The result is: ", result)
+        history.append(f"{num1} * {num2} = {result}")
+
+    elif mode == "/":
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+        if num2 == 0:
+            print("Error: Division by zero is not allowed.")
+            continue
+        result = num1 / num2
+        print("The result is: ", result)
+        history.append(f"{num1} / {num2} = {result}")
+
+    elif mode == "^":
+        base = float(input("Enter the base number: "))
+        exponent = float(input("Enter the exponent number: "))
+        result = math.pow(base, exponent)
+        print("The result is: ", result)
+        history.append(f"{base} ^ {exponent} = {result}")
+
+    elif mode == "sqrt":
+        num = float(input("Enter the number to find the square root of: "))
+        if num < 0:
+            print("Error: Cannot compute square root of a negative number.")
+            continue
+        result = math.sqrt(num)
+        print("The square root is: ", result)
+        history.append(f"sqrt({num}) = {result}")
+
+    elif mode == "log":
+        num = float(input("Enter the number to find the logarithm of: "))
+        if num <= 0:
+            print("Error: Logarithm is not defined for zero or negative numbers.")
+            continue
+        result = math.log(num)
+        print("The logarithm is: ", result)
+        history.append(f"log({num}) = {result}")
+
+    elif mode == "sin":
+        num = float(input("Enter the number to find the sine of: "))
+        result = math.sin(num)
+        print("The sine is: ", result)
+        history.append(f"sin({num}) = {result}")
+
+    elif mode == "cos":
+        num = float(input("Enter the number to find the cosine of: "))
+        result = math.cos(num)
+        print("The cosine is: ", result)
+        history.append(f"cos({num}) = {result}")
+
+    elif mode == "tan":
+        num = float(input("Enter the number to find the tangent of: "))
+        result = math.tan(num)
+        print("The tangent is: ", result)
+        history.append(f"tan({num}) = {result}")
+
+    elif mode == "history":
+        if not history:
+            print("No calculations have been performed yet.")
         else:
-            result = "Error: negative number!"
-        print("\nResult:", result)
-        history.append(f"√{num1} = {result}")
-    else:
-        # --- NORMAL OPERATIONS ---
-        print("\nType the first number:")  
-        num1 = float(input())  
-        print("\nType the second number:")  
-        num2 = float(input())
+            print("Calculation History:")
+            for entry in history:
+                print(entry)
 
-        if mode == "*": result = num1 * num2
-        elif mode == "/": result = num1 / num2 if num2 != 0 else "Error: dividing by zero!"  
-        elif mode == "+": result = num1 + num2
-        elif mode == "-": result = num1 - num2
-        elif mode == "exp": result = num1 ** num2
-        else:  
-            result = "Invalid mode!"
-            print(result)
-            continue  # Jump to next loop if valid.
-
-        print("\nResult:", result)
-        history.append(f"{num1} {mode} {num2} = {result}")
-
-    # Continue?
-    if input("\nContinue? (y/n): ").lower() != "y":
-        print("\nHistory:", "\n".join(history))
+    elif mode == "quit":
         break
+
+    else:
+        print("Invalid input. Please try again.")
+
+    mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, history, quit): ")
+
+if mode not in operations:
+    print("Invalid input. Please try again.")
+    mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, history, quit): ")
+
+with open("history.json", "w") as file:
+    json.dump(history, file)
