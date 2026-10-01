@@ -1,7 +1,7 @@
 import math
 import json
 
-print("Calculator v1.5.5\n")
+print("Calculator v1.5.6\n")
 print("This is a prototype. Please report any bugs.\n")
 print("PS: Only two numbers can be used in each calculation.\n")
 
@@ -11,9 +11,9 @@ try:
 except (FileNotFoundError, json.JSONDecodeError):
     history = []
 
-mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, history, quit): ")
+mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, abs, !, history, quit, clear): ")
 
-operations = ["+", "-", "*", "/", "^", "sqrt", "log", "sin", "cos", "tan", "history", "quit"]
+operations = ["+", "-", "*", "/", "^", "sqrt", "log", "sin", "cos", "tan", "abs", "!", "history", "quit", "clear"]
 
 def get_number(prompt):
     while True:
@@ -97,6 +97,21 @@ while mode in operations:
         print("The tangent is: ", result)
         history.append(f"tan({num}) = {result}")
 
+    elif mode == "!":
+        num = get_number("Enter the number to find the factorial of: ")
+        if num < 0 or not num.is_integer():
+            print("Error: Factorial is only defined for non-negative integers.")
+            continue
+        result = math.factorial(int(num))
+        print("The factorial is: ", result)
+        history.append(f"{int(num)}! = {result}")
+
+    elif mode == "abs":
+        num = get_number("Enter the number to find the absolute value of: ")
+        result = abs(num)
+        print("The absolute value is: ", result)
+        history.append(f"abs({num}) = {result}")
+
     elif mode == "history":
         if not history:
             print("No calculations have been performed yet.")
@@ -108,14 +123,18 @@ while mode in operations:
     elif mode == "quit":
         break
 
+    elif mode == "clear":
+        history = []
+        print("History cleared.")
+
     else:
         print("How Did We Get Here?")
 
-    mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, history, quit): ")
+    mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, abs, !, history, quit, clear): ")
 
 if mode not in operations:
     print("Invalid input. Please try again.")
-    mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, history, quit): ")
+    mode = input("Input which calculation you would like to use (+, -, *, /, ^, sqrt, log, sin, cos, tan, abs, !, history, quit, clear): ")
 
 with open("history.json", "w") as file:
     json.dump(history, file)
