@@ -1,7 +1,7 @@
 import math
 import json
 
-print("Calculator v1.6.0\n") 
+print("Calculator v1.6.1\n") 
 print("This is a prototype. Please report any bugs.\n")
 print("PS: Only two numbers can be used in each calculation.\n")
 
@@ -11,9 +11,9 @@ try: # save history and load only the last 100 calculations to prevent the file 
 except (FileNotFoundError, json.JSONDecodeError):
     history = []
 
-mode = input("Input which calculation you would like to use (+, -, *, /, ^, %, sqrt, log, sin, cos, tan, abs, round, angles, !, history, quit, clear): ")
+mode = input("Input which calculation you would like to use (+, -, *, /, ^, %, root, log, sin, cos, tan, abs, round, angles, !, history, quit, clear): ")
 
-operations = ["+", "-", "*", "/", "^", "%", "sqrt", "log", "sin", "cos", "tan", "abs", "round", "angles", "!", "history", "quit", "clear"]
+operations = ["+", "-", "*", "/", "^", "%", "root", "log", "sin", "cos", "tan", "abs", "round", "angles", "!", "history", "quit", "clear"]
 
 def get_number(prompt): # function to get a valid number from the user.
     while True:
@@ -84,14 +84,15 @@ while mode in operations: # main loop to perform calculations based on user inpu
         print("The result is: ", result)
         history.append(f"{num1} % {num2} = {result}")
 
-    elif mode == "sqrt": # square root
-        num = get_number("Enter the number to find the square root of: ")
+    elif mode == "root": # i am groot
+        num = get_number("Enter the number to find the root of: ")
+        num2 = get_number("Enter the degree of the root: ")
         if num < 0:
-            print("Error: Cannot compute square root of a negative number.")
+            print("Error: Cannot compute root of a negative number.")
             continue
-        result = math.sqrt(num)
-        print("The square root is: ", result)
-        history.append(f"sqrt({num}) = {result}")
+        result = math.pow(num, 1/num2)
+        print("The root is: ", result)
+        history.append(f"root({num}, {num2}) = {result}")
 
     elif mode == "log": # logarithm
         num = get_number("Enter the number to find the logarithm of: ")
@@ -171,11 +172,15 @@ while mode in operations: # main loop to perform calculations based on user inpu
     else:
         print("How Did We Get Here?") # Excuse me what the f*cc
 
-    mode = input("Input which calculation you would like to use (+, -, *, /, ^, %, sqrt, log, sin, cos, tan, abs, round, angles, !, history, quit, clear): ")
+    mode = input("Input which calculation you would like to use (+, -, *, /, ^, %, root, log, sin, cos, tan, abs, round, angles, !, history, quit, clear): ")
 
 if mode not in operations:
     print("Invalid input. Please try again.")
-    mode = input("Input which calculation you would like to use (+, -, *, /, ^, %, sqrt, log, sin, cos, tan, abs, round, angles, !, history, quit, clear): ")
+
+mode = input("Input which calculation you would like to use (+, -, *, /, ^, %, root, log, sin, cos, tan, abs, round, angles, !, history, quit, clear): ")
+
+with open("history.json", "w") as file: # save the calculation history to a .json file.
+    json.dump(history, file)
 
 with open("history.json", "w") as file: # save the calculation history to a .json file.
     json.dump(history, file)
